@@ -5,17 +5,40 @@
 
   <% content_for :title, "Categories" %>
 
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center gap-4">
     <h1 class="font-bold text-4xl">Categories</h1>
-    <%= link_to "New category", new_admin_category_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to "New category", new_admin_category_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium whitespace-nowrap" %>
   </div>
-
-  <div id="admin_categories" class="min-w-full">
-    <% @admin_categories.each do |admin_category| %>
-      <%= render admin_category %>
-      <p>
-        <%= link_to "Show this category", admin_category, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
-    <% end %>
+  <div class="flex flex-col w-full">
+    <div>
+      <div>
+        <div>
+          <table class="min-w-full overflow-x-scroll">
+            <thead class="bg-white border-b">
+              <tr>
+                <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">
+                Name
+                </th>
+                <th scope="col" class="text-sm font-medium text-gray-800 px-6 py-4 text-left">
+                Decription
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @admin_categories.each do |c| %>
+                <tr class="bg-gray-50 border-b">
+                <td class="px-6 py-4 white-space-nowrap text-sm font-medium text-gray-800underline">
+                <%= link_to c.name, edit_admin_category_path(c) %>
+                </td>
+                <td class="px-6 py-4 white-space-nowrap text-sm font-medium text-gray-800underline">
+                <%= c.description %>
+                </td>
+                </tr>
+                <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
